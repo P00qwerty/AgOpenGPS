@@ -12,7 +12,6 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-Properties/BranchInfo.cs
 
 # Mono auto generated files
 mono_crash.*
@@ -35,6 +34,7 @@ AgOpenGPS_v5/
 AgOpenGPS_v63/
 AgOpenGPS_v64/
 AgOpenGPS_v65/
+BranchInfo.*
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
