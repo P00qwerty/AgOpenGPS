@@ -5,7 +5,7 @@ namespace AgOpenGPS
 {
     public static class BuildInfo
     {
-        public static string BranchName = "master";
-        public static string CommitHash = "0000000";
+        public static string BranchName = "unknown";
+        public static string CommitHash = "00000000";
     }
 }
