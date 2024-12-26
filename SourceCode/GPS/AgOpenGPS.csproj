@@ -673,6 +673,7 @@
       <DependentUpon>FormGPS.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\vec3.cs" />
+    <Compile Include="Properties\BranchInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1398,6 +1399,34 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>REM Automatically define the output file path based on the project's directory
+SET OUTPUT_FILE=$(ProjectDir)Properties\BranchInfo.cs
+
+REM Navigate to the project directory
+CD /D $(ProjectDir)
+
+REM Get the current branch name
+FOR /F "tokens=*" %25%25B IN ('git rev-parse --abbrev-ref HEAD') DO SET BRANCH_NAME=%25%25B
+
+REM Get the latest local short commit hash
+FOR /F "tokens=*" %25%25H IN ('git rev-parse --short HEAD') DO SET COMMIT_HASH=%25%25H
+
+REM Generate the C# file content dynamically
+(
+ECHO using System;
+ECHO;
+ECHO //this file is automaticaly generated on Pre-build
+ECHO namespace AgOpenGPS
+ECHO {
+ECHO     public static class BuildInfo
+ECHO     {
+ECHO         public static string BranchName = "%25BRANCH_NAME%25";
+ECHO         public static string CommitHash = "%25COMMIT_HASH%25";
+ECHO     }
+ECHO }
+) &gt; "%25OUTPUT_FILE%25"	</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
