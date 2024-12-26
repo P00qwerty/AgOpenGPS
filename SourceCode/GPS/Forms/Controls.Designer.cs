@@ -660,6 +660,14 @@ namespace AgOpenGPS
                 f.Close();
             }
 
+            f = Application.OpenForms["FormTimedMessage"];
+
+            if (f != null)
+            {
+                f.Focus();
+                f.Close();
+            }
+
             if (this.OwnedForms.Any())
             {
                 TimedMessageBox(2000, gStr.gsWindowsStillOpen, gStr.gsCloseAllWindowsFirst);
